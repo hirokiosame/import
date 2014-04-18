@@ -2,42 +2,37 @@
 
 Temporary solution to inline importing front-end Javascript for modular development.
 
+More lightweight than [smash](https://github.com/mbostock/smash). Has tabulation support.
 
-SAY THIS foo.js:
 
-```js
-import "bar";
-
-function foo() {
-  return "foo" + bar();
+foo.js
+```
+function foo(){
+	return "foo";
 }
 ```
 
-AND THIS bar.js:
-
-```js
-function bar() {
-  return "bar";
+bar.js
+```
+function bar(){
+	console.log("bar");
 }
 ```
 
-WHEN SMASH TOGETHER foo.js AND bar.js:
+baz.js
+```
+import "foo";
 
-```js
-function bar() {
-  return "bar";
+function baz(){
+	console.log(foo());
+	return import "bar";
 }
-
-function foo() {
-  return "foo" + bar();
-}
+baz()();
 ```
 
-SMASH HANDLE CIRCULAR AND REDUNDANT IMPORTS GOOD. SMASH GOOD. SMASH.
 
-SMASH LIKE MAKE, TOO.
-
-```Makefile
-bundle.js: $(shell smash --list src/bundle.js)
-  smash src/bundle.js > bundle.js
+```
+$ ./import test/data1/baz.js | node
+foo
+bar
 ```

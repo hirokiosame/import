@@ -30,6 +30,7 @@ function baz(){
 baz()();
 ```
 
+***
 
 ```
 $ ./import test/data1/baz.js | node

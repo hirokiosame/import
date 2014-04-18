@@ -1,22 +1,22 @@
 {
-  "name": "smash",
-  "version": "0.0.12",
+  "name": "import",
+  "version": "0.0.1",
   "description": "Concatenate files together using import statements.",
   "keywords": [
     "import",
-    "module"
+    "module",
+    "es6"
   ],
   "author": {
-    "name": "Mike Bostock",
-    "url": "http://bost.ocks.org/mike"
+    "name": "Hiroki Osame"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mbostock/smash.git"
+    "url": "https://github.com/hirokiosame/import.git"
   },
-  "main": "index.js",
+  "main": "import",
   "bin": {
-    "smash": "smash"
+    "import": "import"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -34,7 +34,7 @@
   "licenses": [
     {
       "type": "BSD",
-      "url": "https://github.com/mbostock/smash/blob/master/LICENSE"
+      "url": "https://github.com/hirokiosame/import/blob/master/LICENSE"
     }
   ]
 }

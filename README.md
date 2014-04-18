@@ -1,8 +1,9 @@
-# Imprort
+# Import
 
 Temporary solution to inline importing front-end Javascript for modular development.
 
-More lightweight than [smash](https://github.com/mbostock/smash). Has tabulation support.
+Has tabulation support.
+More lightweight than [smash](https://github.com/mbostock/smash).
 
 
 foo.js

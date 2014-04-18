@@ -52,7 +52,10 @@ function importFile(fileName){
 		// Resolve to get the full path every time
 		mapPath = path.resolve(filePath, fileName);
 
+	// Add Error Handlers Later...
 	if( !fs.existsSync(fileName) || fileMap[mapPath] ){ return ""; }
+
+	// Mark as Read
 	fileMap[mapPath] = 1;
 
 	return fs.readFileSync(fileName)

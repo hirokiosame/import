@@ -1,0 +1,73 @@
+#!/usr/bin/env node
+
+var optimist = require('optimist'),
+	fs = require('fs'),
+	path = require('path');
+
+	var argv = optimist
+		.usage(
+			  "Usage: \033[1mimport\033[0m [options] [file …]\n\n"
+			+ "Version: 0.01\n\n"
+			+ "Minimized fork of smash.\n"
+			+ "Concatenates one or more input files, outputting a single merged file.\n"
+			+ "Any import statements in the input files are expanded in-place to the\n"
+			+ "contents of the imported file. If the same file is imported multiple\n"
+			+ "times, only the first instance of the file is included."
+		)
+		.options("list", {
+			describe: "output a list of imported files",
+			type: "boolean",
+			default: false
+		})
+		.options("ignore-missing", {
+			describe: "ignore missing files instead of throwing an error; applies only to --list and --graph",
+			type: "boolean",
+			default: false
+		})
+		.options("graph", {
+			describe: "output the import network in Makefile format",
+			type: "boolean",
+			default: false
+		})
+		.options("help", {
+			describe: "display this helpful message",
+			type: "boolean",
+			default: false
+		})
+		.check(function(argv) {
+			if (argv.help){ return optimist.showHelp(); }
+			if (!argv._.length){ throw new Error("input required"); }
+			if (argv.list && argv.graph){ throw new Error("--list and --graph are exclusive"); }
+		})
+		.argv;
+
+
+
+// To Prevent Circular Imports
+var fileMap = {};
+
+function importFile(fileName){
+	var filePath = path.dirname(fileName),
+
+		// Resolve to get the full path every time
+		mapPath = path.resolve(filePath, fileName);
+
+	if( !fs.existsSync(fileName) || fileMap[mapPath] ){ return ""; }
+	fileMap[mapPath] = 1;
+
+	return fs.readFileSync(fileName)
+			.toString()
+			.replace(/(\/{2,})?([ \t]*)import\b\s[\"\'](.+)(\.js)?[\"\'];/g, function(match, commented, tabs, fileName){
+
+				// JS Doesn't have negative look behind... Ignore if commented
+				// Note: Not sure if support for /**/ should be added since it will be commented out anyway
+				if( commented ){ return match; }
+
+				return tabs + importFile(path.resolve(filePath, fileName+".js")).replace(/\n/g, "\n"+tabs);
+			});
+}
+
+// Output to stdout
+console.log( argv._.map(function(fileName){
+	return importFile(fileName);
+}).join("\n") );

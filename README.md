@@ -1,6 +1,7 @@
-# SMASH
+# Imprort
 
-SMASH TOGETHER FILES! PROBABLY JAVASCRIPT.
+Temporary solution to inline importing front-end Javascript for modular development.
+
 
 SAY THIS foo.js:
 

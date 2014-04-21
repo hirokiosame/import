@@ -49,14 +49,32 @@ function baz(){
 baz()();
 ```
 
-Create an output file
+or Create an output file
 ```
 $ ./import test/data1/baz.js > test/data1/out.js
 ```
 
-Execute in Node
+or Execute in Node
 ```
 $ ./import test/data1/baz.js | node
 foo
 bar
+```
+
+***
+
+```npm install import -g``` to use as a binary
+```
+$ import test/data1/baz.js
+function foo(){
+	return "foo";
+}
+
+function baz(){
+	console.log(foo());
+	return function bar(){
+		console.log("bar");
+	}
+}
+baz()();
 ```

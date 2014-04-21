@@ -5,7 +5,10 @@ Temporary solution to inline importing front-end Javascript for modular developm
 Has tabulation support.
 More lightweight than [smash](https://github.com/mbostock/smash).
 
+## Installation
+```npm install import -g```
 
+## How to Use
 foo.js
 ```
 function foo(){
@@ -35,7 +38,7 @@ baz()();
 
 See final output
 ```
-$ ./import test/data1/baz.js
+$ import test/data1/baz.js
 function foo(){
 	return "foo";
 }
@@ -51,30 +54,12 @@ baz()();
 
 or Create an output file
 ```
-$ ./import test/data1/baz.js > test/data1/out.js
+$ import test/data1/baz.js > test/data1/out.js
 ```
 
 or Execute in Node
 ```
-$ ./import test/data1/baz.js | node
+$ import test/data1/baz.js | node
 foo
 bar
-```
-
-***
-
-```npm install import -g``` to use as a binary
-```
-$ import test/data1/baz.js
-function foo(){
-	return "foo";
-}
-
-function baz(){
-	console.log(foo());
-	return function bar(){
-		console.log("bar");
-	}
-}
-baz()();
 ```

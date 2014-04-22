@@ -1,6 +1,6 @@
 {
   "name": "import",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Concatenate files together using import statements.",
   "keywords": [
     "import",
@@ -14,7 +14,7 @@
     "type": "git",
     "url": "https://github.com/hirokiosame/import.git"
   },
-  "main": "import",
+  "main": "index.js",
   "bin": {
     "import": "import"
   },

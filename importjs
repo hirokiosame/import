@@ -5,7 +5,7 @@ var optimist = require('optimist'),
 
 	var argv = optimist
 		.usage(
-			  "Usage: \033[1mimport\033[0m [options] [file …]\n\n"
+			  "Usage: \033[1mimportjs\033[0m [options] [file …]\n\n"
 			+ "Version: 0.01\n\n"
 			+ "Minimized fork of smash.\n"
 			+ "Concatenates one or more input files, outputting a single merged file.\n"
@@ -18,13 +18,13 @@ var optimist = require('optimist'),
 			type: "boolean",
 			default: false
 		})
-		.options("ignore-missing", {
-			describe: "ignore missing files instead of throwing an error; applies only to --list and --graph",
-			type: "boolean",
-			default: false
+		.options("delimiter", {
+			describe: "specify the delimiter used for concatenating files",
+			type: "string",
+			default: "\n"
 		})
-		.options("graph", {
-			describe: "output the import network in Makefile format",
+		.options("ignore-missing", {
+			describe: "ignore missing files instead of throwing an error",
 			type: "boolean",
 			default: false
 		})
@@ -40,8 +40,7 @@ var optimist = require('optimist'),
 		})
 		.argv;
 
-
 // Output to stdout
 console.log( argv._.map(function(fileName){
 	return importFile(fileName);
-}).join("\n") );
+}).join(argv.delimiter) );

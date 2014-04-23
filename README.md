@@ -4,7 +4,6 @@ Temporary solution to inline importing front-end Javascript for modular developm
 
 Has tabulation support.
 More lightweight than [smash](https://github.com/mbostock/smash).
-
 Removed automatically importing 'index.js'.
 
 ## Installation

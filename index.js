@@ -30,12 +30,8 @@ module.exports = (function(){
 				.toString()
 				.replace(
 					// Regex to match import statements
-					/(\/{2,})?([ \t]*)(.*)import\b\s[\"\'](.+)(\.js)?[\"\'];/g,
-					function(match, commented, tabs, prefix, fileName){
-
-						// JS Doesn't have negative look behind... Ignore if commented
-						// Note: Not sure if support for /**/ should be added since it will be commented out anyway
-						if( commented ){ return match; }
+					/^(?:(?!\/[\/*]))([ \t]*)(.*)import [\"\'](.+)(?:\.js)?[\"\'];(?![^\*]+\*\/)/gm,
+					function(match, tabs, prefix, fileName){
 
 						// Replace Import
 						return tabs + prefix + importFile(path.resolve(filePath, fileName+".js"), fileMap).replace(/\n/g, "\n"+tabs);

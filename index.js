@@ -3,19 +3,25 @@ module.exports = (function(){
 	var fs = require('fs'),
 		path = require('path');
 
-	// To Prevent Circular Imports
-	var fileMap = {};
+	return function importFile(fileName, fileMap){
 
-	return function importFile(fileName){
+		// To Prevent Circular Imports
+		fileMap = fileMap || {};
 
 		// Determine Path for Importing dependent files
 		var filePath = path.dirname(fileName),
 
 			// Resolve to get the full path every time
-			mapPath = path.resolve(filePath, fileName);
+			mapPath = path.resolve(fileName);
 
 		// Add Error Handlers Later...
-		if( !fs.existsSync(fileName) || fileMap[mapPath] ){ return ""; }
+		if(
+			// Check that File Exists
+			!fs.existsSync(fileName) ||
+
+			// Check it hasn't been imported yet
+			fileMap[mapPath]
+		){ return ""; }
 
 		// Mark as Read
 		fileMap[mapPath] = 1;
@@ -32,9 +38,9 @@ module.exports = (function(){
 						if( commented ){ return match; }
 
 						// Replace Import
-						return tabs + prefix + importFile(path.resolve(filePath, fileName+".js")).replace(/\n/g, "\n"+tabs);
+						return tabs + prefix + importFile(path.resolve(filePath, fileName+".js"), fileMap).replace(/\n/g, "\n"+tabs);
 					}
 				);
-	}
+	};
 
 })();

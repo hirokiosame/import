@@ -1,5 +1,5 @@
 {
-  "name": "importjs",
+  "name": "import",
   "version": "0.0.5",
   "description": "Concatenate files together using import statements.",
   "keywords": [
@@ -12,11 +12,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hirokiosame/importjs.git"
+    "url": "https://github.com/hirokiosame/import.git"
   },
   "main": "index.js",
   "bin": {
-    "importjs": "importjs"
+    "import": "import"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -34,7 +34,7 @@
   "licenses": [
     {
       "type": "BSD",
-      "url": "https://github.com/hirokiosame/importjs/blob/master/LICENSE"
+      "url": "https://github.com/hirokiosame/import/blob/master/LICENSE"
     }
   ]
 }

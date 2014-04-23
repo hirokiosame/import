@@ -5,7 +5,7 @@ var optimist = require('optimist'),
 
 	var argv = optimist
 		.usage(
-			  "Usage: \033[1mimportjs\033[0m [options] [file …]\n\n"
+			  "Usage: \033[1mimport\033[0m [options] [file …]\n\n"
 			+ "Version: 0.0.5\n\n"
 			+ "Minimized fork of smash.\n"
 			+ "Concatenates one or more input files, outputting a single merged file.\n"
